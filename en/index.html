@@ -29,9 +29,10 @@
   var APP_URL = 'https://script.google.com/macros/s/AKfycby5V5yKAUeOWHs-Qa4A9iCWOCRBztt5XFiWyJeaIO1py_yZBsjfcDbV_Aegz5hXdAI3/exec';
   var f = document.getElementById('app');
   f.onload = function () { var c = document.getElementById('capa'); c.style.opacity = 0; setTimeout(function () { c.remove(); }, 300); };
-  f.src = APP_URL + '?lang=en';
+  var instalado = (window.matchMedia && matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+  f.src = APP_URL + '?lang=en' + (instalado ? '&standalone=1' : '');
   // Se o Google não abrir dentro do site (por exemplo, com várias contas Google logadas no navegador), este botão abre o app direto.
-  var dl = document.getElementById('direto'); dl.href = APP_URL + '?lang=en';
+  var dl = document.getElementById('direto'); dl.href = APP_URL + '?lang=en' + (instalado ? '&standalone=1' : '');
   setTimeout(function () { dl.style.opacity = 0; setTimeout(function () { dl.remove(); }, 400); }, 12000);
 </script>
 </body>
