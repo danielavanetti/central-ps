@@ -17,10 +17,12 @@
   iframe{position:fixed;inset:0;width:100%;height:100%;border:0;background:#000}
   .capa{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;color:#8c8c88;font:13px -apple-system,system-ui,sans-serif;transition:opacity .3s}
   .capa img{width:96px;height:96px;border-radius:22px}
+  .direto{position:fixed;right:14px;bottom:calc(14px + env(safe-area-inset-bottom));z-index:5;background:#111;color:#fff;font:600 12px -apple-system,system-ui,sans-serif;padding:8px 12px;border-radius:999px;text-decoration:none;opacity:.85;transition:opacity .4s}
 </style>
 </head>
 <body>
 <div class="capa" id="capa"><img src="icon-192.png" alt="Central PS"><span>Abrindo a Central PS…</span></div>
+<a class="direto" id="direto" target="_top">Não abriu? Abrir direto</a>
 <iframe id="app" title="Central PS" allow="clipboard-write"></iframe>
 <script>
   // Link do app (Apps Script). Se a implantação mudar, troque só esta linha.
@@ -28,6 +30,9 @@
   var f = document.getElementById('app');
   f.onload = function () { var c = document.getElementById('capa'); c.style.opacity = 0; setTimeout(function () { c.remove(); }, 300); };
   f.src = APP_URL + '?lang=pt';
+  // Se o Google não abrir dentro do site (por exemplo, com várias contas Google logadas no navegador), este botão abre o app direto.
+  var dl = document.getElementById('direto'); dl.href = APP_URL + '?lang=pt';
+  setTimeout(function () { dl.style.opacity = 0; setTimeout(function () { dl.remove(); }, 400); }, 12000);
 </script>
 </body>
 </html>
